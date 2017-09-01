@@ -12,7 +12,9 @@ def main():
 
     libtcod.console_init_root(screen_width, screen_height, 'py rogue', False) #actually generate the window
 
-    key = libtcod.key() #holds keyboard and mouse input in variables
+    con = libtcod.console_new(screen_width, screen_height)
+
+    key = libtcod.Key() #holds keyboard and mouse input in variables
     mouse = libtcod.Mouse()
 
     while not libtcod.console_is_window_closed(): #a loop that keeps the game running esentially
@@ -33,7 +35,7 @@ def main():
 
         if move:
             dx, dy = move
-            Player_x += dx
+            player_x += dx
             player_y += dy
 
         if exit:
