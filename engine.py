@@ -10,6 +10,9 @@ def main():
     libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD) #set a font
     libtcod.console_init_root(screen_width, screen_height, 'py rogue', False) #actually generate the window
 
+    key = libtcod.key() #holds keyboard and mouse input in variables
+    mouse = libtcod.Mouse()
+
     while not libtcod.console_is_window_closed(): #a loop that keeps the game running esentially
         libtcod.console_set_default_foreground(0, libtcod.white) #set the foreground color
         libtcod.console_put_char(0, player_x, player_y, '@', libtcod.BKGND_NONE) #place a character on screen
