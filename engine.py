@@ -1,4 +1,5 @@
 import libtcodpy as libtcod
+from input_handlers import handle_keys
 
 def main():
     screen_width = 80 #set screen width and height as integers
@@ -8,20 +9,38 @@ def main():
     player_y = int(screen_height / 2)
 
     libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD) #set a font
+
     libtcod.console_init_root(screen_width, screen_height, 'py rogue', False) #actually generate the window
 
     key = libtcod.key() #holds keyboard and mouse input in variables
     mouse = libtcod.Mouse()
 
     while not libtcod.console_is_window_closed(): #a loop that keeps the game running esentially
-        libtcod.console_set_default_foreground(0, libtcod.white) #set the foreground color
-        libtcod.console_put_char(0, player_x, player_y, '@', libtcod.BKGND_NONE) #place a character on screen
+        libtcod.sys_check_for_event(libtcod.EVENT_KEY_PRESS, key, mouse) #updates key and mouse with user inputs
+
+        libtcod.console_set_default_foreground(con, libtcod.white)
+        libtcod.console_put_char(con, player_x, player_y, '@', libtcod.BKGND_NONE)
+        libtcod.console_blit(con, 0, 0, screen_width, screen_height, 0, 0, 0)
         libtcod.console_flush() #updates the screen constantly
 
-        key = libtcod.console_check_for_keypress() #adds a check for a key press, stores it in a variable
+        libtcod.console_put_char(con, player_x, player_y, ' ', libtcod.BKGND_NONE)
 
-        if key.vk == libtcod.KEY_ESCAPE: #if a key press is the escape button, ends the loop
+        action = handle_keys(key)
+
+        move = action.get('move')
+        exit = action.get('exit')
+        fullscreen = action.get('fullscreen')
+
+        if move:
+            dx, dy = move
+            Player_x += dx
+            player_y += dy
+
+        if exit:
             return True
+
+        if fullscreen:
+            libtcod.console_set_fullscreen(not libtcod.console_is_fullscreen())
 
 if __name__ == '__main__':
     main()
