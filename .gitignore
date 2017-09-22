@@ -14,3 +14,4 @@ libtcodxx.a
 libtcodxx.dylib
 libtcodpy.py
 libtcodpy.pyc
+input_handlers.pyc
