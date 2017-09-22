@@ -12,3 +12,5 @@ libtcod.py
 libtcod.pyc
 libtcodxx.a
 libtcodxx.dylib
+libtcodpy.py
+libtcodpy.pyc
