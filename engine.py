@@ -38,8 +38,7 @@ def main():
 
         if move:
             dx, dy = move
-            player_x += dx
-            player_y += dy
+            player.move(dx, dy)
 
         if exit:
             return True
